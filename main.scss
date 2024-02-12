@@ -1,1 +1,99 @@
+$grid-columns: 2;
+$card-side: 200px;
+$transition-time: 1s;
+$number-side: 32px;
+$number-color: #8B0000;
+$name-color: #2F4F4F;
+
+@mixin grid-columns($screen-width, $grid-columns, $card-side) {
+  @media (min-width: $screen-width) {
+    grid-template-columns: repeat($grid-columns, $card-side);
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serifgit;
+}
+
+.catalog {
+  display: grid;
+  gap: 35px 30px;
+  grid-template-columns: repeat($grid-columns, $card-side);
+  justify-content: center;
+  align-content: center;
+  padding: 30px 35px 200px;
+  min-width: 500px;
+  
+  @include grid-columns(750px, 2, $card-side);
+  @include grid-columns(1000px, 4, $card-side);
+}
+
+.card {
+  transition: transform $transition-time;
+  width: $card-side;
+
+  &__logo {
+    position: relative;
+
+    &-image {
+      width: $card-side;
+      height: $card-side;
+      object-fit: cover;
+      object-position: center left;
+      border-radius: 200px;
+      margin-bottom: 4px;
+  
+      &:hover {
+        border-radius: 60px;
+      }
+    }
+
+    &-number {
+      position: absolute;
+      top: ($card-side / 2) - ($number-side / 2);
+      left: $card-side - $number-side - 10px;
+      width: $number-side;
+      height: $number-side;
+      background-color: white;
+      border-radius: 50%;
+      text-align: center;
+      font-size: 16px;
+      line-height: $number-side;
+      letter-spacing: 0em;
+      color: $number-color;
+    }
+  }
+
+  &__details {
+    text-align: center;
+  }
+
+  &__details-name {
+    line-height: 23px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: $name-color;
+    font-size: 20px;
+    font-weight: 600;
+    
+
+  }
+
+  &:hover {
+    background-color:#EEEEEE;
+    border-radius: 10px;
+    transform: scale(1.2);
+    transition: border-radius 1s, transform 1s;
+
+    .card__logo-image {
+      border-radius: 60px;
+    }
+  }
+}
 
